@@ -1,30 +1,37 @@
 import React, {Component} from "react";
 
 class Counter extends Component{
+    formatCount = () => {
+        const {value} = this.props.counter;
+        return value === 0 ? "Zero" : value;
+    };
+
+
     render(){
         return(
             <div>
                 <div className="row">
                     <div>
-                        <span style = {{fontSize: 20}}>
+                        <span style = {{fontSize: 24}} className={this.getBadgeClasses()}>
+                            {this.formatCount()};
                         </span>
                     </div>
                     <div>
                         <button className="btn btn-secondary"
-                            // onClick={() => }
+                            onClick={() => this.props.onIncrement(this.props.counter)}
                             >
                             <i className="fa fa-plus-circle" aria-hidden="true" />
                         </button>
                         <button
                             className="btn btn-info m-2"
-                            // onClick={() => }
-                            // disabled={}
+                            onClick={() => this.props.onDecrement(this.props.counter)}
+                            disabled={this.props.counter.value === 0 ? "disabled" : ""}
                             >
                             <i className="fa fa-minus-circle" aria-hidden="true" />
                         </button>
                         <button
                             className="btn btn-danger"
-                            // onClick={() => }
+                            onClick={() => this.props.onDelete(this.props.counter.id)}
                         >
                             <i className="fa fa-trash-o" aria-hidden="true" />
                         </button>
@@ -33,7 +40,15 @@ class Counter extends Component{
 
             </div>
         )
+
     }
+    getBadgeClasses = () => {
+        let classes = "badge m-2 badge-";
+        classes = this.props.counter.value === 0 ? "warning" : "primary";
+        return classes;
+    }
+
+
 }
 
 export default Counter;

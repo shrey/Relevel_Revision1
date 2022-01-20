@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
 import Counters from './components/counters.jsx'
+import NavBar from './components/navbar';
 
 class App extends Component {
   state = {
@@ -13,6 +14,7 @@ class App extends Component {
     ]
   }
   handleIncrement = (counter) => {
+      console.log("INCREMENT");
       const counters = [...this.state.counters];
       const index = counters.indexOf(counter);
       counters[index] = {...counters[index]};
@@ -20,6 +22,7 @@ class App extends Component {
       this.setState({counters});
   }
   handleDecrement = (counter) => {
+    console.log("DECREMENT");
     const counters = [...this.state.counters];
     const index = counters.indexOf(counter);
     counters[index] = {...counters[index]};
@@ -36,6 +39,7 @@ class App extends Component {
   }
 
   handleDelete = (counterId) => {
+    console.log("DELETE");
     const counters = this.state.counters.filter((c) => c.id !== counterId);
     this.setState({counters});
   }
@@ -50,6 +54,7 @@ class App extends Component {
       <div className='main__wrap'>
         <div className='container'>
           <div className='card__box'>
+            <NavBar totalCounters={this.state.counters.filter((c) => c.value > 0).length} />
             <Counters
               counters = {this.state.counters}
               onReset = {this.handleReset}

@@ -24,7 +24,17 @@ class Counters extends Component{
                         </button>
                     </div>
                 </div>
-
+                {
+                    counters.map((counter) => (
+                        <Counter
+                            key={counter.id}
+                            counter={counter}
+                            onIncrement={onIncrement}
+                            onDecrement={onDecrement}
+                            onDelete={onDelete}
+                        />
+                    ))
+                }
             </div>
         )
     }
